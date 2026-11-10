@@ -15,9 +15,9 @@ nextflow.enable.dsl = 2
 
 // ─── Parameters ───────────────────────────────────────────────────────────────
 
-params.output_dir_root = "/fh/fast/thomas_p/grp/TIRTL/projects/"         // Root output directory
+params.output_dir_root = "/fh/fast/thomas_p/grp/TIRTL/projects"         // Root output directory
 params.threads    = 4                   // Threads per MiXCR call
-params.memory     = "14g"               // JVM heap for MiXCR  (-Xmx)
+//params.memory     = "14g"               // JVM heap for MiXCR  (-Xmx)
 params.mixcr_jar_file = "/fh/fast/thomas_p/grp/TIRTL/apps/mixcr.jar"
 params.sample_sheet = "metadata/tirtlSeq_sample_32-UDindex_phased.tsv" // sheet with nucleotide sequences for UD indices 
 //params.sample_sheet_mouse = "metadata/tirtlSeq_sample_index_mouse_v260923_upper.tsv"
@@ -46,7 +46,7 @@ process GET_FASTQ_FILES {
     script:
     """
     ml R/4.4.2-gfbf-2024a
-    Rscript ${projectDir}/02_get_fastq_files.R ${fastq_dir}
+    Rscript ${projectDir}/helper_scripts/get_fastq_files.R ${fastq_dir}
     """
 }
 
@@ -76,7 +76,7 @@ process MIXCR_ANALYZE {
         --floating-left-alignment-boundary \\
         --floating-right-alignment-boundary C \\
         --split-by-sample \\
-        --sample-sheet ${params.sample_sheet} \\
+        --sample-sheet "${projectDir}/metadata/${params.sample_sheet}" \\
         ${r1} ${r2} \\
         '${well_id}i'
     
@@ -146,8 +146,8 @@ workflow.onComplete {
     =========================================
     MiXCR 384-Well Plate Pipeline — ${status}
     ─────────────────────────────────────────
-    Input dir  : ${fastq_dir_val}
-    Project    : ${project_name}
+    Input dir  : ${params.input_dir}
+    Project    : ${params.project_name}
     Output dir : ${params.publish_dir}
     Duration   : ${workflow.duration}
     =========================================
