@@ -7,7 +7,7 @@
  * of a 384-well plate (rows A–P, columns 1–24).
  *
  * Usage:
- *   nextflow run tirtl_seq_mixcr_pipeline.nf --input_dir <DIR> --project_name <NAME> -resume
+ *   nextflow run /fh/fast/thomas_p/grp/nick_c/git/mixcr_pipeline/tirtl_seq_mixcr_pipeline.nf --input_dir <DIR> --project_name <NAME> -resume
  */
 
 nextflow.enable.dsl = 2
@@ -76,7 +76,7 @@ process MIXCR_ANALYZE {
         --floating-left-alignment-boundary \\
         --floating-right-alignment-boundary C \\
         --split-by-sample \\
-        --sample-sheet "${projectDir}/metadata/${params.sample_sheet}" \\
+        --sample-sheet "${projectDir}/${params.sample_sheet}" \\
         ${r1} ${r2} \\
         '${well_id}i'
     
