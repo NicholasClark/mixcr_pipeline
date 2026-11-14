@@ -56,3 +56,6 @@ The pairing function will output three tab-separated (.tsv) files:
 
 ## After pairing
 
+See the following vignettes for loading paired data in R  and analyzing it using TIRTLtools:
+- https://nicholasclark.github.io/TIRTLtools/articles/data_import.html
+- https://nicholasclark.github.io/TIRTLtools/articles/plot_examples.html
