@@ -80,9 +80,9 @@ process MIXCR_ANALYZE {
         ${r1} ${r2} \\
         '${well_id}i'
     
-    rm '${well_id}i'*.vdjca
-    rm '${well_id}i'*.clns
-    gzip '${well_id}i'*.tsv
+    #rm '${well_id}i'*.vdjca ## un-comment this line to save space and automatically delete the .vdjca files
+    #rm '${well_id}i'*.clns ## un-comment this line to save space and automatically delete the .clns files
+    gzip '${well_id}i'*.tsv ## Note: we compress (gzip) the text file outputs to save space
     """
 }
 
